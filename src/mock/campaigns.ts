@@ -5,10 +5,10 @@ import { addDays } from 'date-fns';
 export const mockCampaigns: Campaign[] = [
   {
     id: '1',
-    title: 'Polkadot NFT Marketplace',
-    creator: 'Alice',
-    description: 'Building a next-gen NFT marketplace specifically for the Polkadot ecosystem, enabling artists and collectors to trade digital assets with minimal fees and cross-chain compatibility.',
-    imageUrl: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
+    title: 'EcoWatch: Solar-Powered Smart Watch',
+    creator: 'TechWear Labs',
+    description: 'A revolutionary smart watch powered by solar energy, featuring a high-resolution display, fitness tracking, and a sleek, sustainable design. Never worry about charging your watch again.',
+    imageUrl: 'https://images.pexels.com/photos/434346/pexels-photo-434346.jpeg',
     goal: 50000,
     raised: 35000,
     startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 15), // 15 days ago
@@ -20,28 +20,28 @@ export const mockCampaigns: Campaign[] = [
         id: 1,
         name: 'Early Bird',
         requiredAmount: 50,
-        description: 'Early access to the marketplace and a limited edition NFT'
+        description: 'Get the EcoWatch at a special early bird price'
       },
       {
         id: 2,
-        name: 'Collector',
+        name: 'Premium Package',
         requiredAmount: 250,
-        description: 'All previous rewards + 5 exclusive NFTs and premium account status'
+        description: 'EcoWatch + premium leather strap and charging dock'
       },
       {
         id: 3,
-        name: 'Founding Member',
+        name: 'Collector Edition',
         requiredAmount: 1000,
-        description: 'All previous rewards + lifetime no-fee trading and governance rights'
+        description: 'Limited edition titanium EcoWatch + all accessories + lifetime warranty'
       }
     ]
   },
   {
     id: '2',
-    title: 'DeFi Aggregator for Polkadot',
-    creator: 'Bob',
-    description: 'Creating a DeFi dashboard that aggregates all Polkadot parachains and allows users to manage their assets, stake, and participate in DeFi across the entire ecosystem from one interface.',
-    imageUrl: 'https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg',
+    title: 'ArtMaster Pro Drawing Tablet',
+    creator: 'Creative Tools Co',
+    description: 'Professional-grade drawing tablet with 4K resolution, tilt support, and pressure sensitivity. Includes custom shortcut keys and a revolutionary new stylus design for digital artists.',
+    imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg',
     goal: 75000,
     raised: 60000,
     startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // 30 days ago
@@ -51,30 +51,30 @@ export const mockCampaigns: Campaign[] = [
     rewardTiers: [
       {
         id: 1,
-        name: 'Beta Tester',
+        name: 'Standard Edition',
         requiredAmount: 100,
-        description: 'Early beta access and a branded hardware wallet'
+        description: 'ArtMaster Pro tablet + standard stylus'
       },
       {
         id: 2,
-        name: 'Power User',
+        name: 'Artist Bundle',
         requiredAmount: 500,
-        description: 'All previous rewards + premium features unlocked for 1 year'
+        description: 'ArtMaster Pro + premium stylus + carrying case + 1-year creative software subscription'
       },
       {
         id: 3,
-        name: 'Whale Status',
+        name: 'Studio Package',
         requiredAmount: 2000,
-        description: 'All previous rewards + lifetime premium access and quarterly strategy calls'
+        description: 'Two ArtMaster Pro tablets + all accessories + lifetime software subscription'
       }
     ]
   },
   {
     id: '3',
-    title: 'Cross-Chain Identity Solution',
-    creator: 'Charlie',
-    description: 'Developing a universal identity solution that works across Polkadot, Ethereum, and other major blockchains, allowing users to maintain a consistent identity and reputation across the entire Web3 ecosystem.',
-    imageUrl: 'https://images.pexels.com/photos/8369648/pexels-photo-8369648.jpeg',
+    title: 'UrbanFlex Sneakers',
+    creator: 'Street Style Collective',
+    description: 'Revolutionary sneakers with adaptable soles that conform to your feet, providing unmatched comfort for any activity. Made from sustainable materials with customizable LED accents.',
+    imageUrl: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg',
     goal: 120000,
     raised: 48000,
     startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 20), // 20 days ago
@@ -84,30 +84,30 @@ export const mockCampaigns: Campaign[] = [
     rewardTiers: [
       {
         id: 1,
-        name: 'Identity Pioneer',
+        name: 'Classic Edition',
         requiredAmount: 75,
-        description: 'Early access to the identity platform and a verified profile badge'
+        description: 'One pair of UrbanFlex sneakers in your choice of color'
       },
       {
         id: 2,
-        name: 'Identity Ambassador',
+        name: 'Customized Pack',
         requiredAmount: 350,
-        description: 'All previous rewards + custom identity features and enhanced security options'
+        description: 'Two pairs of fully customizable UrbanFlex sneakers + exclusive colorways'
       },
       {
         id: 3,
-        name: 'Identity Whale',
+        name: 'Collector Set',
         requiredAmount: 1500,
-        description: 'All previous rewards + lifetime enterprise subscription and DAO governance rights'
+        description: 'Limited edition set of four UrbanFlex sneakers + custom display case'
       }
     ]
   },
   {
     id: '4',
-    title: 'Substrate Developer Academy',
-    creator: 'Dave',
-    description: 'Creating a comprehensive learning platform for Substrate, Polkadot\'s blockchain framework, with courses for beginners to advanced developers, live mentoring, and hands-on projects.',
-    imageUrl: 'https://images.pexels.com/photos/8721318/pexels-photo-8721318.jpeg',
+    title: 'Artisan Canvas Backpack',
+    creator: 'Heritage Craft Co',
+    description: 'Handcrafted premium canvas backpack with leather trim, designed for both style and functionality. Features water-resistant coating, laptop compartment, and hidden anti-theft pockets.',
+    imageUrl: 'https://images.pexels.com/photos/1546003/pexels-photo-1546003.jpeg',
     goal: 90000,
     raised: 22500,
     startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10), // 10 days ago
@@ -117,22 +117,23 @@ export const mockCampaigns: Campaign[] = [
     rewardTiers: [
       {
         id: 1,
-        name: 'Student',
+        name: 'Classic Pack',
         requiredAmount: 120,
-        description: 'Full access to all courses and learning materials for 1 year'
+        description: 'Artisan Canvas Backpack in your choice of color'
       },
       {
         id: 2,
-        name: 'Developer',
+        name: 'Travel Set',
         requiredAmount: 500,
-        description: 'All previous rewards + mentoring sessions and project reviews'
+        description: 'Backpack + matching duffle bag + leather accessories'
       },
       {
         id: 3,
-        name: 'Blockchain Expert',
+        name: 'Premium Collection',
         requiredAmount: 2500,
-        description: 'All previous rewards + certification, job placement, and lifetime updates'
+        description: 'Full collection of bags and accessories in limited edition leather'
       }
     ]
   },
 ];
+
