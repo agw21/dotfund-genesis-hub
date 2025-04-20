@@ -3,21 +3,36 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useWallet } from '@/context/WalletContext';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Check, User } from 'lucide-react';
+import { Check, User, Wallet } from 'lucide-react';
+import { toast } from '@/components/ui/sonner';
 
 const shortenAddress = (address: string) => {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 };
 
 export const WalletConnect: React.FC = () => {
-  const { isConnected, isConnecting, connectWallet, selectedAccount, accounts, selectAccount } = useWallet();
+  const { 
+    isConnected, 
+    isConnecting, 
+    connectWallet, 
+    selectedAccount, 
+    accounts, 
+    selectAccount,
+    isExtensionAvailable
+  } = useWallet();
 
   const handleConnect = async () => {
     try {
       await connectWallet();
     } catch (error) {
       console.error('Failed to connect wallet:', error);
+      // Toast is already shown in the context
     }
+  };
+
+  const openExtensionDownload = () => {
+    window.open('https://polkadot.js.org/extension/', '_blank');
+    toast.info('Please install the Polkadot extension, create an account, and refresh the page');
   };
 
   if (isConnected && selectedAccount) {
@@ -54,6 +69,15 @@ export const WalletConnect: React.FC = () => {
           </div>
         </PopoverContent>
       </Popover>
+    );
+  }
+
+  if (!isExtensionAvailable) {
+    return (
+      <Button onClick={openExtensionDownload} variant="destructive">
+        <Wallet className="mr-2" />
+        Install Polkadot Extension
+      </Button>
     );
   }
 
