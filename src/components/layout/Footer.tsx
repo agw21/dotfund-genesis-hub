@@ -23,9 +23,6 @@ export const Footer: React.FC = () => {
             <Link to="/how-it-works" className="text-sm text-muted-foreground hover:text-foreground">
               How It Works
             </Link>
-            <a href="https://github.com" target="_blank" className="text-sm text-muted-foreground hover:text-foreground">
-              GitHub
-            </a>
             <Link to="/docs" className="text-sm text-muted-foreground hover:text-foreground">
               Documentation
             </Link>
