@@ -38,8 +38,8 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const checkExtension = async () => {
       // This will directly check if the extension exists in the window object
       const isPolkadotDefined = typeof window !== 'undefined' &&
-        window.injectedWeb3 && 
-        Object.keys(window.injectedWeb3).some(key => key.startsWith('polkadot'));
+        window.injectedWeb3 !== undefined && 
+        Object.keys(window.injectedWeb3 || {}).some(key => key.startsWith('polkadot'));
       
       // Use either the direct check or the isWeb3Injected flag
       const isAvailable = isPolkadotDefined || isWeb3Injected;
