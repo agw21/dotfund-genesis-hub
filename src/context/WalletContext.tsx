@@ -36,8 +36,20 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
   useEffect(() => {
     const checkExtension = async () => {
-      const isAvailable = isWeb3Injected;
-      console.log('Polkadot extension available:', isAvailable);
+      // This will directly check if the extension exists in the window object
+      const isPolkadotDefined = typeof window !== 'undefined' &&
+        window.injectedWeb3 && 
+        Object.keys(window.injectedWeb3).some(key => key.startsWith('polkadot'));
+      
+      // Use either the direct check or the isWeb3Injected flag
+      const isAvailable = isPolkadotDefined || isWeb3Injected;
+      
+      console.log('Polkadot extension available check:', {
+        isPolkadotDefined,
+        isWeb3Injected,
+        finalResult: isAvailable
+      });
+      
       setIsExtensionAvailable(isAvailable);
       
       if (isAvailable) {
@@ -58,7 +70,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       console.log('Attempting to connect wallet');
       setIsConnecting(true);
       
-      if (!isWeb3Injected) {
+      if (!isExtensionAvailable) {
         console.error('No Polkadot.js extension found');
         toast.error('No Polkadot extension detected. Please install the Polkadot{.js} extension and create an account.');
         throw new Error('No extension installed');

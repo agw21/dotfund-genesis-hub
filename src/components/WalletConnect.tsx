@@ -35,6 +35,12 @@ export const WalletConnect: React.FC = () => {
     toast.info('Please install the Polkadot extension, create an account, and refresh the page');
   };
 
+  console.log('WalletConnect rendering state:', { 
+    isConnected, 
+    isExtensionAvailable, 
+    hasSelectedAccount: !!selectedAccount 
+  });
+
   if (isConnected && selectedAccount) {
     return (
       <Popover>
