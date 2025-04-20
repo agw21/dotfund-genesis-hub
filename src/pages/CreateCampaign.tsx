@@ -164,7 +164,7 @@ const CreateCampaign = () => {
           <div className="space-y-6">
             <div className="space-y-2">
               <Label>Campaign</Label>
-              <div className="flex flex-col gap-4 mb-4">
+              <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                   <div className="relative">
                     <input
@@ -187,7 +187,7 @@ const CreateCampaign = () => {
                   </div>
                 </div>
 
-                {renderMediaPreview()}
+                {formData.imageUrl && renderMediaPreview()}
               </div>
               
               <Label htmlFor="title">Campaign Title</Label>
