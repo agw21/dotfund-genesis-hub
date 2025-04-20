@@ -133,33 +133,8 @@ const CreateCampaign = () => {
         return (
           <div className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="title">Campaign Title</Label>
-              <Input
-                id="title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                placeholder="Enter a compelling title for your campaign"
-                required
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="description">Campaign Description</Label>
-              <Textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                placeholder="Describe your project, what you're building, and why people should support it"
-                className="min-h-32"
-                required
-              />
-            </div>
-            
-            <div className="space-y-2">
               <Label>Campaign Cover Image</Label>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 mb-4">
                 <div className="flex items-center gap-2">
                   <div className="relative">
                     <input
@@ -214,6 +189,29 @@ const CreateCampaign = () => {
                   </div>
                 )}
               </div>
+              
+              <Label htmlFor="title">Campaign Title</Label>
+              <Input
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Enter a compelling title for your campaign"
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="description">Campaign Description</Label>
+              <Textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Describe your project, what you're building, and why people should support it"
+                className="min-h-32"
+                required
+              />
             </div>
             
             <div className="flex justify-end">
