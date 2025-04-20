@@ -1,15 +1,31 @@
 
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import { web3Accounts, web3Enable, isWeb3Injected } from '@polkadot/extension-dapp';
-import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { toast } from '@/components/ui/sonner';
 
+// Create dummy accounts for testing
+const DUMMY_ACCOUNTS = [
+  {
+    address: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
+    meta: {
+      name: 'Alice',
+      source: 'dummy'
+    }
+  },
+  {
+    address: '5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty',
+    meta: {
+      name: 'Bob',
+      source: 'dummy'
+    }
+  }
+];
+
 interface WalletContextType {
-  accounts: InjectedAccountWithMeta[];
-  selectedAccount: InjectedAccountWithMeta | null;
+  accounts: typeof DUMMY_ACCOUNTS;
+  selectedAccount: (typeof DUMMY_ACCOUNTS)[number] | null;
   isConnecting: boolean;
   connectWallet: () => Promise<void>;
-  selectAccount: (account: InjectedAccountWithMeta) => void;
+  selectAccount: (account: (typeof DUMMY_ACCOUNTS)[number]) => void;
   isConnected: boolean;
   isExtensionAvailable: boolean;
 }
@@ -21,7 +37,7 @@ const defaultContext: WalletContextType = {
   connectWallet: async () => {},
   selectAccount: () => {},
   isConnected: false,
-  isExtensionAvailable: false,
+  isExtensionAvailable: true, // Always true for dummy version
 };
 
 const WalletContext = createContext<WalletContextType>(defaultContext);
@@ -29,87 +45,30 @@ const WalletContext = createContext<WalletContextType>(defaultContext);
 export const useWallet = () => useContext(WalletContext);
 
 export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
-  const [selectedAccount, setSelectedAccount] = useState<InjectedAccountWithMeta | null>(null);
+  const [accounts, setAccounts] = useState<typeof DUMMY_ACCOUNTS>([]);
+  const [selectedAccount, setSelectedAccount] = useState<(typeof DUMMY_ACCOUNTS)[number] | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [isExtensionAvailable, setIsExtensionAvailable] = useState(false);
-
-  useEffect(() => {
-    const checkExtension = async () => {
-      // This will directly check if the extension exists in the window object
-      const isPolkadotDefined = typeof window !== 'undefined' &&
-        window.injectedWeb3 !== undefined && 
-        Object.keys(window.injectedWeb3 || {}).some(key => key.startsWith('polkadot'));
-      
-      // Use either the direct check or the isWeb3Injected flag
-      const isAvailable = isPolkadotDefined || isWeb3Injected;
-      
-      console.log('Polkadot extension available check:', {
-        isPolkadotDefined,
-        isWeb3Injected,
-        finalResult: isAvailable
-      });
-      
-      setIsExtensionAvailable(isAvailable);
-      
-      if (isAvailable) {
-        try {
-          // Initialize extension without requesting access
-          await web3Enable('DotFund');
-        } catch (error) {
-          console.error('Error initializing extension:', error);
-        }
-      }
-    };
-    
-    checkExtension();
-  }, []);
 
   const connectWallet = async (): Promise<void> => {
     try {
-      console.log('Attempting to connect wallet');
       setIsConnecting(true);
+      // Simulate connection delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      if (!isExtensionAvailable) {
-        console.error('No Polkadot.js extension found');
-        toast.error('No Polkadot extension detected. Please install the Polkadot{.js} extension and create an account.');
-        throw new Error('No extension installed');
-      }
-      
-      // Check if Polkadot.js extension is available
-      const extensions = await web3Enable('DotFund');
-      console.log('Available extensions:', extensions);
-      
-      if (extensions.length === 0) {
-        console.error('Extension found but not authorized');
-        toast.error('Please authorize access to the Polkadot extension when prompted.');
-        throw new Error('User did not approve the connection');
-      }
-      
-      const allAccounts = await web3Accounts();
-      console.log('Discovered accounts:', allAccounts);
-      
-      if (allAccounts.length === 0) {
-        toast.error('No accounts found in your Polkadot wallet. Please create an account first.');
-        throw new Error('No accounts found in wallet');
-      }
-      
-      setAccounts(allAccounts);
-      
-      if (allAccounts.length > 0) {
-        setSelectedAccount(allAccounts[0]);
-        toast.success('Wallet connected successfully!');
-      }
+      setAccounts(DUMMY_ACCOUNTS);
+      setSelectedAccount(DUMMY_ACCOUNTS[0]);
+      toast.success('Wallet connected successfully!');
     } catch (error) {
-      console.error('Detailed wallet connection error:', error);
-      throw error;
+      console.error('Wallet connection error:', error);
+      toast.error('Failed to connect wallet');
     } finally {
       setIsConnecting(false);
     }
   };
 
-  const selectAccount = (account: InjectedAccountWithMeta) => {
+  const selectAccount = (account: (typeof DUMMY_ACCOUNTS)[number]) => {
     setSelectedAccount(account);
+    toast.success(`Switched to account: ${account.meta.name}`);
   };
 
   return (
@@ -121,7 +80,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         connectWallet,
         selectAccount,
         isConnected: !!selectedAccount,
-        isExtensionAvailable,
+        isExtensionAvailable: true, // Always true for dummy version
       }}
     >
       {children}
