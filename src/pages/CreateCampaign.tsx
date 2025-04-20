@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format, addDays } from "date-fns";
@@ -72,15 +71,7 @@ const CreateCampaign = () => {
     );
   };
 
-  const handleStepChange = async (step: number) => {
-    if (step > currentStep && !isConnected) {
-      try {
-        await connectWallet();
-      } catch (error) {
-        console.error("Failed to connect wallet:", error);
-        return;
-      }
-    }
+  const handleStepChange = (step: number) => {
     setCurrentStep(step);
   };
 
@@ -89,26 +80,29 @@ const CreateCampaign = () => {
     
     if (!isConnected) {
       try {
+        toast.info("Please connect your wallet to complete this action");
         await connectWallet();
+        
+        if (!isConnected) {
+          return;
+        }
       } catch (error) {
         console.error("Failed to connect wallet:", error);
+        toast.error("Wallet connection required to create a campaign");
         return;
       }
     }
     
     setLoading(true);
     try {
-      // In a real app, this would interact with the blockchain
       console.log("Creating campaign with data:", { ...formData, rewardTiers });
       
-      // Simulate delay
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
-      // Redirect to a success page or the campaign details
       navigate("/campaign-success");
     } catch (error) {
       console.error("Error creating campaign:", error);
-      alert("Failed to create campaign. Please try again.");
+      toast.error("Failed to create campaign. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -339,6 +333,14 @@ const CreateCampaign = () => {
               <p className="text-sm text-muted-foreground">
                 Review your campaign details before submitting to the blockchain.
               </p>
+              {!isConnected && (
+                <div className="bg-amber-50 border border-amber-200 rounded-md p-3 my-4">
+                  <p className="text-amber-800 font-medium">Wallet connection required</p>
+                  <p className="text-sm text-amber-700">
+                    You'll need to connect your Polkadot wallet before creating your campaign.
+                  </p>
+                </div>
+              )}
             </div>
             
             <div className="space-y-4">
@@ -425,8 +427,8 @@ const CreateCampaign = () => {
               <Button variant="outline" onClick={() => handleStepChange(3)}>
                 Back
               </Button>
-              <Button onClick={handleSubmit} disabled={loading}>
-                {loading ? "Creating Campaign..." : "Create Campaign"}
+              <Button onClick={handleSubmit} disabled={loading || (!isConnected && loading)}>
+                {loading ? "Creating Campaign..." : !isConnected ? "Connect Wallet & Create" : "Create Campaign"}
               </Button>
             </div>
           </div>
