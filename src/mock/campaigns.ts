@@ -1,6 +1,6 @@
 
 import { Campaign } from '@/lib/types';
-import { addDays } from 'date-fns';
+import { addDays, subDays } from 'date-fns';
 
 export const mockCampaigns: Campaign[] = [
   {
@@ -40,14 +40,14 @@ export const mockCampaigns: Campaign[] = [
     id: '2',
     title: 'ArtMaster Pro Drawing Tablet',
     creator: 'Creative Tools Co',
-    description: 'Professional-grade drawing tablet with 4K resolution, tilt support, and pressure sensitivity. Includes custom shortcut keys and a revolutionary new stylus design for digital artists.',
+    description: 'Professional-grade drawing tablet with 4K resolution, tilt support, and pressure sensitivity. Project successfully funded and all rewards delivered to backers.',
     imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg',
     goal: 75000,
-    raised: 60000,
-    startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // 30 days ago
-    endDate: addDays(new Date(), 30),
-    status: 'active',
-    backers: 542,
+    raised: 82000,
+    startDate: subDays(new Date(), 90),
+    endDate: subDays(new Date(), 30),
+    status: 'completed',
+    backers: 942,
     rewardTiers: [
       {
         id: 1,
@@ -73,13 +73,13 @@ export const mockCampaigns: Campaign[] = [
     id: '3',
     title: 'UrbanFlex Sneakers',
     creator: 'Street Style Collective',
-    description: 'Revolutionary sneakers with adaptable soles that conform to your feet, providing unmatched comfort for any activity. Made from sustainable materials with customizable LED accents.',
+    description: 'Revolutionary sneakers with adaptable soles that conform to your feet. Campaign did not reach funding goal within the timeframe.',
     imageUrl: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg',
     goal: 120000,
     raised: 48000,
-    startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 20), // 20 days ago
-    endDate: addDays(new Date(), 40),
-    status: 'active',
+    startDate: subDays(new Date(), 70),
+    endDate: subDays(new Date(), 10),
+    status: 'failed',
     backers: 384,
     rewardTiers: [
       {
@@ -106,7 +106,7 @@ export const mockCampaigns: Campaign[] = [
     id: '4',
     title: 'Artisan Canvas Backpack',
     creator: 'Heritage Craft Co',
-    description: 'Handcrafted premium canvas backpack with leather trim, designed for both style and functionality. Features water-resistant coating, laptop compartment, and hidden anti-theft pockets.',
+    description: 'Handcrafted premium canvas backpack with leather trim. Features water-resistant coating and hidden anti-theft pockets.',
     imageUrl: 'https://images.pexels.com/photos/1546003/pexels-photo-1546003.jpeg',
     goal: 90000,
     raised: 22500,
@@ -136,4 +136,3 @@ export const mockCampaigns: Campaign[] = [
     ]
   },
 ];
-

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Campaign } from "@/lib/types";
 import { formatDistanceToNow } from "date-fns";
+import { Trophy, PackageX, Rocket } from "lucide-react";
 
 interface CampaignCardProps {
   campaign: Campaign;
@@ -13,7 +14,6 @@ interface CampaignCardProps {
 
 export const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onView }) => {
   const progress = Math.min(Math.round((campaign.raised / campaign.goal) * 100), 100);
-  const timeLeft = formatDistanceToNow(new Date(campaign.endDate), { addSuffix: true });
   
   const formattedRaised = new Intl.NumberFormat('en-US', { 
     style: 'currency', 
@@ -29,8 +29,39 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onView }) 
     maximumFractionDigits: 0
   }).format(campaign.goal);
 
+  const getStatusIcon = () => {
+    switch (campaign.status) {
+      case 'completed':
+        return <Trophy className="h-4 w-4 text-green-500" />;
+      case 'failed':
+        return <PackageX className="h-4 w-4 text-destructive" />;
+      default:
+        return <Rocket className="h-4 w-4 text-primary" />;
+    }
+  };
+
+  const getStatusBadge = () => {
+    switch (campaign.status) {
+      case 'completed':
+        return <span className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">Funded</span>;
+      case 'failed':
+        return <span className="absolute top-2 right-2 bg-destructive text-destructive-foreground px-2 py-1 rounded-full text-xs font-medium">Not Funded</span>;
+      case 'active':
+        return <span className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium">Active</span>;
+      default:
+        return null;
+    }
+  };
+
+  const timeLeft = campaign.status === 'active' 
+    ? formatDistanceToNow(new Date(campaign.endDate), { addSuffix: true })
+    : campaign.status === 'completed'
+    ? 'Campaign ended successfully'
+    : 'Campaign ended';
+
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-lg">
+    <Card className="overflow-hidden transition-all hover:shadow-lg relative">
+      {getStatusBadge()}
       <div className="aspect-video w-full overflow-hidden">
         <img 
           src={campaign.imageUrl} 
@@ -39,7 +70,10 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onView }) 
         />
       </div>
       <CardHeader className="px-4 py-3 pb-1">
-        <CardTitle className="line-clamp-1 text-lg">{campaign.title}</CardTitle>
+        <CardTitle className="line-clamp-1 text-lg flex items-center gap-2">
+          {getStatusIcon()}
+          {campaign.title}
+        </CardTitle>
         <CardDescription className="line-clamp-1">by {campaign.creator}</CardDescription>
       </CardHeader>
       <CardContent className="px-4 py-2">
@@ -57,7 +91,7 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onView }) 
           </div>
           <div className="text-right">
             <p className="font-bold">{timeLeft}</p>
-            <p className="text-muted-foreground text-xs">remaining</p>
+            <p className="text-muted-foreground text-xs">{campaign.status === 'active' ? 'remaining' : ''}</p>
           </div>
         </div>
       </CardContent>
