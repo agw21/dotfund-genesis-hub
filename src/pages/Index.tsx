@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -28,7 +27,7 @@ const Index = () => {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
-                    Fund Your Project with NFTs on Polkadot
+                    Fund Your Project with DotFund
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
                     DotFund makes blockchain crowdfunding accessible to everyone. Launch your product as
