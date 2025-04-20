@@ -133,7 +133,7 @@ const CreateCampaign = () => {
         return (
           <div className="space-y-6">
             <div className="space-y-2">
-              <Label>Campaign Cover Image</Label>
+              <Label>Campaign</Label>
               <div className="flex flex-col gap-4 mb-4">
                 <div className="flex items-center gap-2">
                   <div className="relative">
@@ -151,7 +151,7 @@ const CreateCampaign = () => {
                     >
                       <label htmlFor="imageUpload" className="cursor-pointer">
                         <Upload className="mr-2" />
-                        Upload Image
+                        Upload Media
                       </label>
                     </Button>
                   </div>
@@ -172,7 +172,7 @@ const CreateCampaign = () => {
                       >
                         <label htmlFor="replaceImageUpload" className="cursor-pointer">
                           <Upload className="mr-2" />
-                          Replace Image
+                          Upload Media
                         </label>
                       </Button>
                     </div>
