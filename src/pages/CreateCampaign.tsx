@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format, addDays } from "date-fns";
@@ -27,9 +28,9 @@ const CreateCampaign = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    imageUrl: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg", // Default image
+    imageUrl: "", // Remove default image
     goal: 10000,
-    duration: 60, // 60 days default
+    duration: 60,
   });
   
   const [rewardTiers, setRewardTiers] = useState<RewardTier[]>([
