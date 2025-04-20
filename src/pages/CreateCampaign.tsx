@@ -165,36 +165,29 @@ const CreateCampaign = () => {
             <div className="space-y-2">
               <Label>Campaign Cover Image</Label>
               <div className="flex flex-col gap-4">
-                <div className="relative">
-                  <input
-                    type="file"
-                    id="imageUpload"
-                    className="sr-only"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    asChild
-                  >
-                    <label htmlFor="imageUpload" className="cursor-pointer">
-                      <Upload className="mr-2" />
-                      Upload Image
-                    </label>
-                  </Button>
-                </div>
-                
-                {formData.imageUrl && (
-                  <div className="space-y-4">
-                    <div className="aspect-video rounded-md overflow-hidden border">
-                      <img
-                        src={formData.imageUrl}
-                        alt="Campaign preview"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
+                <div className="flex items-center gap-2">
+                  <div className="relative">
+                    <input
+                      type="file"
+                      id="imageUpload"
+                      className="sr-only"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      asChild
+                    >
+                      <label htmlFor="imageUpload" className="cursor-pointer">
+                        <Upload className="mr-2" />
+                        Upload Image
+                      </label>
+                    </Button>
+                  </div>
+
+                  {formData.imageUrl && (
+                    <div className="relative">
                       <input
                         type="file"
                         id="replaceImageUpload"
@@ -213,6 +206,16 @@ const CreateCampaign = () => {
                         </label>
                       </Button>
                     </div>
+                  )}
+                </div>
+
+                {formData.imageUrl && (
+                  <div className="aspect-video rounded-md overflow-hidden border">
+                    <img
+                      src={formData.imageUrl}
+                      alt="Campaign preview"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 )}
               </div>
