@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format, addDays } from "date-fns";
@@ -8,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Upload } from "lucide-react";
 import { 
   Card,
   CardContent,
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/card";
 import { useWallet } from "@/context/WalletContext";
 import { RewardTier } from "@/lib/types";
+import { toast } from "@/components/ui/sonner";
 
 const CreateCampaign = () => {
   const navigate = useNavigate();
@@ -112,6 +113,25 @@ const CreateCampaign = () => {
     }
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        toast.error("Image size should be less than 5MB");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({
+          ...prev,
+          imageUrl: reader.result as string
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -143,23 +163,47 @@ const CreateCampaign = () => {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="imageUrl">Cover Image URL</Label>
-              <Input
-                id="imageUrl"
-                name="imageUrl"
-                value={formData.imageUrl}
-                onChange={handleChange}
-                placeholder="https://example.com/your-image.jpg"
-              />
-              {formData.imageUrl && (
-                <div className="mt-2 aspect-video rounded-md overflow-hidden border">
-                  <img
-                    src={formData.imageUrl}
-                    alt="Campaign preview"
-                    className="w-full h-full object-cover"
+              <Label htmlFor="imageUrl">Campaign Cover Image</Label>
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-4 items-start">
+                  <Input
+                    id="imageUrl"
+                    name="imageUrl"
+                    value={formData.imageUrl}
+                    onChange={handleChange}
+                    placeholder="https://example.com/your-image.jpg"
+                    className="flex-1"
                   />
+                  <div className="relative">
+                    <input
+                      type="file"
+                      id="imageUpload"
+                      className="sr-only"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      asChild
+                    >
+                      <label htmlFor="imageUpload" className="cursor-pointer">
+                        <Upload className="mr-2" />
+                        Upload
+                      </label>
+                    </Button>
+                  </div>
                 </div>
-              )}
+                {formData.imageUrl && (
+                  <div className="mt-2 aspect-video rounded-md overflow-hidden border">
+                    <img
+                      src={formData.imageUrl}
+                      alt="Campaign preview"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
             
             <div className="flex justify-end">
