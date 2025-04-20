@@ -88,7 +88,7 @@ const Index = () => {
             <div className="text-center mb-12">
               <h2 className="text-2xl font-bold tracking-tight md:text-3xl mb-2">How DotFund Works</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Our blockchain-powered crowdfunding platform uses NFTs to create a seamless experience for creators and backers
+                Our blockchain-powered crowdfunding platform uses NFTs to create a seamless experience for creators and backers, with secure escrow functionality
               </p>
             </div>
             
@@ -99,7 +99,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2">Create Your Campaign</h3>
                 <p className="text-muted-foreground">
-                  Set your funding goal, campaign duration, and define your reward tiers for backers
+                  Set your funding goal, campaign duration, and define your reward tiers for backers. All campaigns run for 60 days.
                 </p>
               </div>
               
@@ -107,9 +107,9 @@ const Index = () => {
                 <div className="bg-secondary/10 p-3 rounded-full mb-4">
                   <div className="w-10 h-10 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center font-bold">2</div>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Backers Mint NFTs</h3>
+                <h3 className="text-xl font-bold mb-2">Secure Funding Process</h3>
                 <p className="text-muted-foreground">
-                  Supporters fund your project by minting NFTs at $1 each, automatically qualifying for reward tiers
+                  Backers mint NFTs at $1 each, with funds held securely in an escrow wallet until the campaign ends. This ensures safe transactions for everyone.
                 </p>
               </div>
               
@@ -117,9 +117,9 @@ const Index = () => {
                 <div className="bg-primary/10 p-3 rounded-full mb-4">
                   <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">3</div>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Claim Your Rewards</h3>
+                <h3 className="text-xl font-bold mb-2">Campaign Resolution</h3>
                 <p className="text-muted-foreground">
-                  After a successful campaign, backers receive special NFTs that unlock their tier rewards
+                  After 60 days, if the target is reached, funds are transferred to the creator. If not reached, all funds are automatically refunded to backers.
                 </p>
               </div>
             </div>
