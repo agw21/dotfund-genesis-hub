@@ -112,8 +112,8 @@ const CreateCampaign = () => {
   const handleMediaUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 10 * 1024 * 1024) {
-        toast.error("File size should be less than 10MB");
+      if (file.size > 1024 * 1024 * 1024) {
+        toast.error("File size should be less than 1GB");
         return;
       }
 
