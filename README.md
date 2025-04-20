@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
 
-## Project info
+# DotFund - Web3 Crowdfunding Platform on Polkadot Asset Hub
 
-**URL**: https://lovable.dev/projects/2952e0d9-18d6-4432-8bff-a0c94524ce79
+DotFund allows creators to raise funds by minting their products as open edition ERC-1155 NFTs, priced at $1 per mint. Backers can mint these NFTs during a 60-day campaign window and are automatically assigned reward tiers based on their contribution.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Open Edition NFT Campaigns**: Creators launch campaigns by minting NFTs priced at $1 each
+- **Automatic Tier Assignment**: Backers are assigned to reward tiers based on contribution amount
+- **60-Day Campaign Window**: All campaigns run for a fixed 60-day period
+- **Reward NFT Airdrops**: Successful campaigns trigger automatic NFT airdrops to backers
+- **Goal-Based Claiming**: Product claiming only allowed if funding goal is reached
 
-**Use Lovable**
+## Technical Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2952e0d9-18d6-4432-8bff-a0c94524ce79) and start prompting.
+- **Frontend**: React, TypeScript, TailwindCSS, shadcn/ui
+- **Blockchain**: Polkadot Asset Hub
+- **Smart Contracts**: Ink! (Rust-based smart contract language for Substrate)
+- **Token Standard**: ERC-1155 (Multi-token standard)
 
-Changes made via Lovable will be committed automatically to this repo.
+## Smart Contract Implementation
 
-**Use your preferred IDE**
+The platform consists of two primary smart contracts:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. **Campaign Factory Contract**: Creates and manages individual campaign contracts
+2. **Campaign Contract**: Handles the core functionality for each campaign:
+   - Minting NFTs
+   - Tracking contributions
+   - Assigning reward tiers
+   - Distributing reward NFTs
+   - Managing campaign lifecycle
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Key Contract Functions
 
-Follow these steps:
+```rust
+// Campaign creation
+fn create_campaign(
+    creator: AccountId,
+    title: String,
+    description: String,
+    goal: Balance,
+    reward_tiers: Vec<RewardTier>
+) -> Result<AccountId, Error>;
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+// NFT minting
+fn mint(amount: u64) -> Result<(), Error>;
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+// Campaign finalization
+fn finalize_campaign() -> Result<(), Error>;
 
-# Step 3: Install the necessary dependencies.
-npm i
+// Reward claiming
+fn claim_rewards() -> Result<(), Error>;
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm
+- Polkadot{.js} browser extension
+- Ink! development tools (for smart contract development)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/dotfund.git
+cd dotfund
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Smart Contract Development
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Install the Substrate/Ink! development environment
+2. Navigate to the contracts directory:
+```bash
+cd contracts
+```
 
-**Use GitHub Codespaces**
+3. Build the contracts:
+```bash
+cargo contract build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+4. Deploy to the Polkadot Asset Hub (requires proper account setup):
+```bash
+cargo contract upload --suri "your-seed-phrase"
+```
 
-## What technologies are used for this project?
+## Contributing
 
-This project is built with:
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## License
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/2952e0d9-18d6-4432-8bff-a0c94524ce79) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License - see the LICENSE file for details.
