@@ -30,8 +30,7 @@ const Index = () => {
                     Fund Your Project with DotFund
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    DotFund makes blockchain crowdfunding accessible to everyone. Launch your product as
-                    ERC-1155 NFTs and build a community while raising funds.
+                    DotFund makes blockchain crowdfunding accessible to everyone. Launch your crowdfund and build a community while raising funds.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -48,8 +47,8 @@ const Index = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-2xl opacity-20 blur-3xl" />
                   <div className="relative bg-background rounded-xl overflow-hidden border shadow-xl">
                     <img
-                      src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg"
-                      alt="NFT Collectibles"
+                      src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9"
+                      alt="Smartwatch"
                       className="w-full h-full object-cover"
                     />
                   </div>
