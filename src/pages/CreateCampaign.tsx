@@ -181,32 +181,10 @@ const CreateCampaign = () => {
                     >
                       <label htmlFor="imageUpload" className="cursor-pointer">
                         <Upload className="mr-2" />
-                        Upload Media
+                        {formData.imageUrl ? "Replace Media" : "Upload Media"}
                       </label>
                     </Button>
                   </div>
-
-                  {formData.imageUrl && (
-                    <div className="relative">
-                      <input
-                        type="file"
-                        id="replaceImageUpload"
-                        className="sr-only"
-                        accept="image/*,video/*"
-                        onChange={handleMediaUpload}
-                      />
-                      <Button
-                        type="button"
-                        variant="outline"
-                        asChild
-                      >
-                        <label htmlFor="replaceImageUpload" className="cursor-pointer">
-                          <Upload className="mr-2" />
-                          Upload Media
-                        </label>
-                      </Button>
-                    </div>
-                  )}
                 </div>
 
                 {renderMediaPreview()}
