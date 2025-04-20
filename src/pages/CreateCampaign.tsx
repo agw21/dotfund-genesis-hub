@@ -27,7 +27,8 @@ const CreateCampaign = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    imageUrl: "", // Remove default image
+    imageUrl: "",
+    mediaType: "",
     goal: 10000,
     duration: 60,
   });
@@ -108,11 +109,17 @@ const CreateCampaign = () => {
     }
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMediaUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        toast.error("Image size should be less than 5MB");
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("File size should be less than 10MB");
+        return;
+      }
+
+      const fileType = file.type.split('/')[0];
+      if (fileType !== 'image' && fileType !== 'video') {
+        toast.error("Please upload an image or video file");
         return;
       }
 
@@ -120,11 +127,34 @@ const CreateCampaign = () => {
       reader.onloadend = () => {
         setFormData(prev => ({
           ...prev,
-          imageUrl: reader.result as string
+          imageUrl: reader.result as string,
+          mediaType: fileType
         }));
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const renderMediaPreview = () => {
+    if (!formData.imageUrl) return null;
+
+    return (
+      <div className="aspect-video rounded-md overflow-hidden border">
+        {formData.mediaType === 'video' ? (
+          <video
+            src={formData.imageUrl}
+            controls
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <img
+            src={formData.imageUrl}
+            alt="Campaign preview"
+            className="w-full h-full object-cover"
+          />
+        )}
+      </div>
+    );
   };
 
   const renderStep = () => {
@@ -141,8 +171,8 @@ const CreateCampaign = () => {
                       type="file"
                       id="imageUpload"
                       className="sr-only"
-                      accept="image/*"
-                      onChange={handleImageUpload}
+                      accept="image/*,video/*"
+                      onChange={handleMediaUpload}
                     />
                     <Button
                       type="button"
@@ -162,8 +192,8 @@ const CreateCampaign = () => {
                         type="file"
                         id="replaceImageUpload"
                         className="sr-only"
-                        accept="image/*"
-                        onChange={handleImageUpload}
+                        accept="image/*,video/*"
+                        onChange={handleMediaUpload}
                       />
                       <Button
                         type="button"
@@ -179,15 +209,7 @@ const CreateCampaign = () => {
                   )}
                 </div>
 
-                {formData.imageUrl && (
-                  <div className="aspect-video rounded-md overflow-hidden border">
-                    <img
-                      src={formData.imageUrl}
-                      alt="Campaign preview"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
+                {renderMediaPreview()}
               </div>
               
               <Label htmlFor="title">Campaign Title</Label>
