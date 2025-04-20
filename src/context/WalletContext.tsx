@@ -32,21 +32,28 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
   const connectWallet = async (): Promise<void> => {
     try {
+      console.log('Attempting to connect wallet');
       setIsConnecting(true);
+      
+      // Check if Polkadot.js extension is available
       const extensions = await web3Enable('DotFund');
+      console.log('Available extensions:', extensions);
       
       if (extensions.length === 0) {
+        console.error('No Polkadot.js extension found');
         throw new Error('No extension installed, or user did not approve the connection');
       }
       
       const allAccounts = await web3Accounts();
+      console.log('Discovered accounts:', allAccounts);
+      
       setAccounts(allAccounts);
       
       if (allAccounts.length > 0) {
         setSelectedAccount(allAccounts[0]);
       }
     } catch (error) {
-      console.error('Error connecting wallet:', error);
+      console.error('Detailed wallet connection error:', error);
       throw error;
     } finally {
       setIsConnecting(false);
