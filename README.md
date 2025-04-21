@@ -1,9 +1,9 @@
 
-# DotFund - Blockchain Crowdfunding on Polkadot Asset Hub 🚀
+# Walf Dot Fund - Blockchain Crowdfunding on Polkadot Asset Hub 🚀
 
 ## 🌟 Project Overview
 
-DotFund is a decentralized crowdfunding platform built on the Polkadot Asset Hub, revolutionizing how creators raise funds and engage with their community. By leveraging blockchain technology, we provide a transparent, secure, and innovative funding mechanism.
+DotFund is a decentralized crowdfunding platform built on the Polkadot Asset Hub, revolutionizing how entreprenuers raise funds and engage with their community. By leveraging blockchain technology, we provide a transparent, secure, and innovative funding mechanism.
 
 ## 🔑 Key Features
 
@@ -82,12 +82,6 @@ We welcome contributions! Please see our [Contribution Guidelines](CONTRIBUTING.
 ## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-## 💬 Contact & Community
-
-- **Website**: [DotFund Official Site](https://dotfund.app)
-- **Discord**: [Join our Community](https://discord.gg/dotfund)
-- **Twitter**: [@DotFundOfficial](https://twitter.com/dotfund)
 
 ---
 
